@@ -5,8 +5,8 @@
   "keywords": [
     "gulpplugin"
   ],
-  "repository": "https://github.secureserver.net/clbrown/gulp-swig",
-  "author": "Colyn Brown <clbrown@godaddy.com>",
+  "repository": "https://github.com/colynb/gulp-swig",
+  "author": "Colyn Brown <colyn.brown@gmail.com>",
   "dependencies": {
     "event-stream": "~3.0.15",
     "clone": "~0.1.9",
