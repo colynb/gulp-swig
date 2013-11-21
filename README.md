@@ -1,4 +1,3 @@
-
 ## Information
 
 <table>
@@ -25,6 +24,55 @@ var swig = require('gulp-swig');
 gulp.task('templates', function() {
   gulp.src('./lib/*.html')
     .pipe(swig())
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
+Inject variables from data object into templates
+
+```javascript
+var swig = require('gulp-swig');
+var opts = {
+  data: {
+    headline: "Welcome"
+  }
+};
+gulp.task('templates', function() {
+  gulp.src('./lib/*.html')
+    .pipe(swig(opts))
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
+Inject variables from JSON file into templates
+
+If you've created a template called ```homepage.html``` you can create a JSON file called ```homepage.json``` to contain any variables you want injected into the template.
+
+```javascript
+var swig = require('gulp-swig');
+var opts = {
+  load_json: true
+};
+gulp.task('templates', function() {
+  gulp.src('./lib/*.html')
+    .pipe(swig(opts))
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
+Inject variables from both a data object and JSON file into templates
+
+```javascript
+var swig = require('gulp-swig');
+var opts = {
+  load_json: true,
+  data: {
+    headline: "Welcome"
+  }
+};
+gulp.task('templates', function() {
+  gulp.src('./lib/*.html')
+    .pipe(swig(opts))
     .pipe(gulp.dest('./dist/'))
 });
 ```
