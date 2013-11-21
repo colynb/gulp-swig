@@ -14,6 +14,8 @@
 </tr>
 </table>
 
+[Learn more about templating with Swig](http://paularmstrong.github.io/swig/)
+
 ## Usage
 
 Compile to HTML
