@@ -1,19 +1,37 @@
 var es = require('event-stream');
-var compile = require('swig');
+var swig = require('swig');
 var clone = require('clone');
 var ext = require('gulp-util').replaceExtension;
+var fs = require('fs');
+
+function extend(target) {
+    var sources = [].slice.call(arguments, 1);
+    sources.forEach(function (source) {
+        for (var prop in source) {
+            target[prop] = source[prop];
+        }
+    });
+    return target;
+}
 
 module.exports = function(options){
   'use strict';
 
   var opts = options ? clone(options) : {};
 
-  function swig(file, callback){
-    var newFile = clone(file);
-    opts.filename = file.path;
+  function gulpswig(file, callback){
 
-    var tpl = compile.compileFile(file.path);
-    var compiled = tpl(opts.data);
+    var data = opts.data || {};
+
+    if (opts.load_json === true) {
+      var jsonPath = ext(file.path, '.json');
+      var json = JSON.parse(fs.readFileSync(jsonPath));
+      data = extend(json, data);
+    }
+    
+    var newFile = clone(file);
+    var tpl = swig.compileFile(file.path);
+    var compiled = tpl(data);
 
     newFile.path = ext(newFile.path, '.html');
     newFile.shortened = newFile.shortened && ext(newFile.shortened, '.html');
@@ -22,5 +40,5 @@ module.exports = function(options){
     callback(null, newFile);
   }
 
-  return es.map(swig);
+  return es.map(gulpswig);
 };

@@ -1,11 +1,9 @@
 var gulp = require('gulp');
 var expect = require('chai').expect;
 var task = require('../');
-var compile = require('swig');
 var es = require('event-stream');
 var path = require('path');
-var fs = require('fs');
-var extname = require('path').extname;
+var extname = path.extname;
 
 require('mocha');
 
@@ -21,24 +19,47 @@ describe('gulp-swig compilation', function(){
       options = options || {};
       var ext = '.html';
       return es.map(function(file){
-        options.filename = filename;
-        var tpl = compile.compileFile(filename);
-        var expected = tpl({message:'hello'});
-        expect(expected).to.equal(String(file.contents));
+        var result = String(file.contents);
+        var expected = options.expected;
+        expect(result).to.equal(expected);
         expect(extname(file.path)).to.equal(ext);
-        if(file.shortened){
-          expect(extname(file.shortened)).to.equal(ext);
-        } else {
-          expect(extname(file.shortened)).to.equal('');
-        }
         done();
       });
     }
 
-    it('should compile my swig files into HTML', function(done){
+    it('should compile my swig files into HTML with data obj', function(done){
+      var opts = {
+        data : {
+          message1 : 'hello'
+        },
+        expected : '<div class="layout">hello</div>'
+      };
       gulp.src(filename)
-        .pipe(task({data:{message:'hello'}}))
-        .pipe(expectStream(done));
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
+    });
+
+    it('should compile my swig files into HTML with json file', function(done){
+      var opts = {
+        load_json: true,
+        expected : '<div class="layout">hello</div>'
+      };
+      gulp.src(filename)
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
+    });
+
+    it('should compile my swig files into HTML with both data obj and json file', function(done){
+      var opts = {
+        load_json: true,
+        data: {
+          message2: "world"
+        },
+        expected : '<div class="layout">helloworld</div>'
+      };
+      gulp.src(filename)
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
     });
 
   });
