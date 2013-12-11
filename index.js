@@ -18,6 +18,7 @@ module.exports = function(options){
   'use strict';
 
   var opts = options ? clone(options) : {};
+  swig.setDefaults(opts)
 
   function gulpswig(file, callback){
 
@@ -28,7 +29,7 @@ module.exports = function(options){
       var json = JSON.parse(fs.readFileSync(jsonPath));
       data = extend(json, data);
     }
-    
+
     var newFile = clone(file);
     var tpl = swig.compileFile(file.path);
     var compiled = tpl(data);
