@@ -62,6 +62,20 @@ describe('gulp-swig compilation', function(){
         .pipe(expectStream(done, opts));
     });
 
+    it('should compile my swig files into HTML with data callback', function(done){
+      var opts = {
+        data : function (file) {
+          return {
+            message1 : path.basename(file.path)
+          };
+        },
+        expected : '<div class="layout">test.html</div>'
+      };
+      gulp.src(filename)
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
+    });
+
   });
 
 });

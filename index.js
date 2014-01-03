@@ -23,6 +23,10 @@ module.exports = function(options){
 
     var data = opts.data || {};
 
+    if (typeof data === 'function') {
+      data = data(file);
+    }
+
     if (opts.load_json === true) {
       var jsonPath = ext(file.path, '.json');
       var json = JSON.parse(fs.readFileSync(jsonPath));
