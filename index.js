@@ -34,7 +34,6 @@ module.exports = function(options){
     var compiled = tpl(data);
 
     newFile.path = ext(newFile.path, '.html');
-    newFile.shortened = newFile.shortened && ext(newFile.shortened, '.html');
     newFile.contents = new Buffer(compiled);
 
     callback(null, newFile);
