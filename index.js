@@ -17,7 +17,9 @@ function extend(target) {
 module.exports = function(options){
   'use strict';
 
-  var opts = options ? clone(options) : {};
+  var opts = options ? clone(options) : {
+      'ext': ".html"
+  };
 
   function gulpswig(file, callback){
 
@@ -33,7 +35,7 @@ module.exports = function(options){
     var tpl = swig.compileFile(file.path);
     var compiled = tpl(data);
 
-    newFile.path = ext(newFile.path, '.html');
+    newFile.path = ext(newFile.path, opts.ext);
     newFile.contents = new Buffer(compiled);
 
     callback(null, newFile);
