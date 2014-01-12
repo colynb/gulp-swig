@@ -79,6 +79,25 @@ gulp.task('templates', function() {
 });
 ```
 
+Inject variables using the [Swig::setDefaults](http://paularmstrong.github.io/swig/docs/api/#setDefaults) method, and set other swig defaults.
+
+```javascript
+var swig = require('gulp-swig');
+var opts = {
+  defaults: { cache: false, locals: { site_name: "My Blog" } },
+  data: {
+    headline: "Welcome"
+  }
+};
+gulp.task('templates', function() {
+  gulp.src('./lib/*.html')
+    .pipe(swig(opts))
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
+
+
 ## LICENSE
 
 (MIT License)
