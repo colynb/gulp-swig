@@ -21,6 +21,10 @@ module.exports = function(options){
       'ext': ".html"
   };
 
+  if (opts.defaults) {
+    swig.setDefaults(opts.defaults);  
+  }
+  
   function gulpswig(file, callback){
 
     var data = opts.data || {};

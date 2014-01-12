@@ -13,16 +13,15 @@ describe('gulp-swig compilation', function(){
 
   describe('gulp-swig', function(){
 
-    var filename = path.join(__dirname, './fixtures/test.html');
+    var filename_with_layout = path.join(__dirname, './fixtures/test.html');
+    var filename_without_layout = path.join(__dirname, './fixtures/test2.html');
 
     function expectStream(done, options){
       options = options || {};
-      var ext = '.html';
       return es.map(function(file){
         var result = String(file.contents);
         var expected = options.expected;
         expect(result).to.equal(expected);
-        expect(extname(file.path)).to.equal(ext);
         done();
       });
     }
@@ -34,7 +33,7 @@ describe('gulp-swig compilation', function(){
         },
         expected : '<div class="layout">hello</div>'
       };
-      gulp.src(filename)
+      gulp.src(filename_with_layout)
         .pipe(task(opts))
         .pipe(expectStream(done, opts));
     });
@@ -44,7 +43,7 @@ describe('gulp-swig compilation', function(){
         load_json: true,
         expected : '<div class="layout">hello</div>'
       };
-      gulp.src(filename)
+      gulp.src(filename_with_layout)
         .pipe(task(opts))
         .pipe(expectStream(done, opts));
     });
@@ -57,7 +56,17 @@ describe('gulp-swig compilation', function(){
         },
         expected : '<div class="layout">helloworld</div>'
       };
-      gulp.src(filename)
+      gulp.src(filename_with_layout)
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
+    });
+
+    it('should set swig defaults', function(done){
+      var opts = {
+        defaults : { locals: { message1: "Hello World" } },
+        expected : 'Hello World'
+      };
+      gulp.src(filename_without_layout)
         .pipe(task(opts))
         .pipe(expectStream(done, opts));
     });
