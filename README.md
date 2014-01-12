@@ -16,6 +16,12 @@
 
 [Learn more about templating with Swig](http://paularmstrong.github.io/swig/)
 
+## Install with NPM
+
+```
+$ npm install --save-dev gulp-swig
+```
+
 ## Usage
 
 Compile to HTML
