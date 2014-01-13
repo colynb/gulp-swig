@@ -17,9 +17,8 @@ function extend(target) {
 module.exports = function(options){
   'use strict';
 
-  var opts = options ? clone(options) : {
-      'ext': ".html"
-  };
+  var opts = options ? clone(options) : {};
+  opts.ext = opts.ext || ".html";
 
   if (opts.defaults) {
     swig.setDefaults(opts.defaults);  
