@@ -5,10 +5,13 @@ var ext = require('gulp-util').replaceExtension;
 var fs = require('fs');
 
 function extend(target) {
+    'use strict';
     var sources = [].slice.call(arguments, 1);
     sources.forEach(function (source) {
         for (var prop in source) {
-            target[prop] = source[prop];
+            if (source.hasOwnProperty(prop)) {
+                target[prop] = source[prop];
+            }
         }
     });
     return target;
@@ -17,14 +20,13 @@ function extend(target) {
 module.exports = function(options){
   'use strict';
 
-  var opts = options ? clone(options) : {
-      'ext': ".html"
-  };
+  var opts = options ? clone(options) : {};
+  opts.ext = opts.ext || ".html";
 
   if (opts.defaults) {
-    swig.setDefaults(opts.defaults);  
+    swig.setDefaults(opts.defaults);
   }
-  
+
   function gulpswig(file, callback){
 
     var data = opts.data || {};
@@ -34,7 +36,7 @@ module.exports = function(options){
       var json = JSON.parse(fs.readFileSync(jsonPath));
       data = extend(json, data);
     }
-    
+
     var newFile = clone(file);
     var tpl = swig.compileFile(file.path);
     var compiled = tpl(data);
