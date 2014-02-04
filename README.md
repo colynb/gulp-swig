@@ -12,11 +12,10 @@
 <td>Node Version</td>
 <td>≥ 0.8</td>
 </tr>
-<tr>
-<td>Build</td>
-<td>[![Build Status](https://travis-ci.org/colynb/gulp-swig.png?branch=master)](https://travis-ci.org/colynb/gulp-swig)</td>
-</tr>
 </table>
+
+[![Build Status](https://travis-ci.org/colynb/gulp-swig.png?branch=master)](https://travis-ci.org/colynb/gulp-swig)
+
 
 [Learn more about templating with Swig](http://paularmstrong.github.io/swig/)
 
