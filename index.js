@@ -23,9 +23,17 @@ module.exports = function(options){
   var opts = options ? clone(options) : {};
   opts.ext = opts.ext || ".html";
 
-  if (opts.defaults) {
-    swig.setDefaults(opts.defaults);
+  //create defaults object
+  if (!opts.hasOwnProperty('defaults')) {
+    opts.defaults = {};
   }
+
+  //disable cache by default
+  if (!opts.defaults.hasOwnProperty('cache')) {
+    opts.defaults.cache = false;
+  }
+
+  swig.setDefaults(opts.defaults);
 
   function gulpswig(file, callback){
 
