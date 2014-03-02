@@ -3,6 +3,7 @@ var expect = require('chai').expect;
 var task = require('../');
 var es = require('event-stream');
 var path = require('path');
+var marked = require('swig-marked');
 var extname = path.extname;
 
 require('mocha');
@@ -15,6 +16,7 @@ describe('gulp-swig compilation', function(){
 
     var filename_with_layout = path.join(__dirname, './fixtures/test.html');
     var filename_without_layout = path.join(__dirname, './fixtures/test2.html');
+    var filename_with_markdown = path.join(__dirname, './fixtures/test3.html');
 
     function expectStream(done, options){
       options = options || {};
@@ -81,6 +83,18 @@ describe('gulp-swig compilation', function(){
         expected : '<div class="layout">test.html</div>'
       };
       gulp.src(filename_with_layout)
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
+    });
+
+    it('should compile markdown by defining a custom tag using opts.setup', function(done){
+      var opts = {
+        setup : function (swig) {
+          marked.useTag(swig, 'markdown');
+        },
+        expected : '<p><strong>hello</strong><br>world</p>\n'
+      };
+      gulp.src(filename_with_markdown)
         .pipe(task(opts))
         .pipe(expectStream(done, opts));
     });

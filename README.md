@@ -105,6 +105,23 @@ gulp.task('templates', function() {
 });
 ```
 
+Enable swig extensions using the setup option.
+
+```javascript
+var swig = require('gulp-swig');
+var marked = require('swig-marked');
+var opts = {
+  setup: function(swig) {
+    marked.useTag(swig, 'markdown');
+  }
+};
+gulp.task('templates', function() {
+  gulp.src('./lib/*.html') // containing markdown tag: {% markdown %}**hello**{% endmarkdown %}
+    .pipe(swig(opts))
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
 
 
 ## LICENSE
