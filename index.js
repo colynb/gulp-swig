@@ -27,6 +27,10 @@ module.exports = function(options){
     swig.setDefaults(opts.defaults);
   }
 
+  if (opts.setup && typeof opts.setup === 'function') {
+    opts.setup(swig);
+  }
+
   function gulpswig(file, callback){
 
     var data = opts.data || {};
