@@ -88,6 +88,24 @@ gulp.task('templates', function() {
 });
 ```
 
+By default, gulp-swig will look for the json data file in the same location as the template. If you have your data in a different location, there's an option for that:
+
+```javascript
+var swig = require('gulp-swig');
+var opts = {
+  load_json: true,
+  json_path: './data/',
+  data: {
+    headline: "Welcome"
+  }
+};
+gulp.task('templates', function() {
+  gulp.src('./lib/*.html')
+    .pipe(swig(opts))
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
 Inject variables using the [Swig::setDefaults](http://paularmstrong.github.io/swig/docs/api/#setDefaults) method, and set other swig defaults.
 
 ```javascript
