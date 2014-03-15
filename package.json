@@ -1,6 +1,6 @@
 {
   "name": "gulp-swig",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Swig Plugin for Gulp",
   "keywords": [
     "gulpplugin", "swig"

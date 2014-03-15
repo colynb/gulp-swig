@@ -1,21 +1,23 @@
 var es = require('event-stream');
 var swig = require('swig');
 var clone = require('clone');
-var ext = require('gulp-util').replaceExtension;
+var gutil = require('gulp-util');
+var ext = gutil.replaceExtension;
+var PluginError = gutil.PluginError;
 var fs = require('fs');
 var path = require('path');
 
 function extend(target) {
-    'use strict';
-    var sources = [].slice.call(arguments, 1);
-    sources.forEach(function (source) {
-      for (var prop in source) {
-        if (source.hasOwnProperty(prop)) {
-          target[prop] = source[prop];
-        }
+  'use strict';
+  var sources = [].slice.call(arguments, 1);
+  sources.forEach(function (source) {
+    for (var prop in source) {
+      if (source.hasOwnProperty(prop)) {
+        target[prop] = source[prop];
       }
-    });
-    return target;
+    }
+  });
+  return target;
 }
 
 module.exports = function(options){
@@ -41,15 +43,16 @@ module.exports = function(options){
     }
 
     if (opts.load_json === true) {
-
-      if (opts.json_path) {
-        jsonPath = path.join(opts.json_path,ext(path.basename(file.path), '.json'));
-      } else {
-        jsonPath = ext(file.path, '.json');
+      try {
+        if (opts.json_path) {
+          jsonPath = path.join(opts.json_path,ext(path.basename(file.path), '.json'));
+        } else {
+          jsonPath = ext(file.path, '.json');
+        }
+        data = extend(JSON.parse(fs.readFileSync(jsonPath)), data);
+      } catch (err) {
+        throw new PluginError('gulp-swig', err.toString());
       }
-
-      var json = JSON.parse(fs.readFileSync(jsonPath));
-      data = extend(json, data);
     }
 
     var newFile = clone(file);
