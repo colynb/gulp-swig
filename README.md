@@ -16,7 +16,9 @@
 
 [![Build Status](https://travis-ci.org/colynb/gulp-swig.png?branch=master)](https://travis-ci.org/colynb/gulp-swig)
 
-[![NPM](https://nodei.co/npm/gulp-swig.png)](https://npmjs.org/package/gulp-swig)
+[![NPM](https://nodei.co/npm/gulp-swig.png?stars&downloads)](https://npmjs.org/package/gulp-swig)
+
+[Learn more about gulp.js, the streaming build system](http://gulpjs.com)
 
 [Learn more about templating with Swig](http://paularmstrong.github.io/swig/)
 
