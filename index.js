@@ -49,7 +49,10 @@ module.exports = function(options){
         } else {
           jsonPath = ext(file.path, '.json');
         }
-        data = extend(JSON.parse(fs.readFileSync(jsonPath)), data);
+
+        if (fs.existsSync(jsonPath)) {
+          data = extend(JSON.parse(fs.readFileSync(jsonPath)), data);
+        }
       } catch (err) {
         throw new PluginError('gulp-swig', err.toString());
       }

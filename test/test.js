@@ -15,6 +15,7 @@ describe('gulp-swig compilation', function(){
 
   var filename_with_layout = path.join(__dirname, './fixtures/test.html');
   var filename_without_layout = path.join(__dirname, './fixtures/test2.html');
+  var filename_without_json = path.join(__dirname, './fixtures/test4.html');
   var filename_with_markdown = path.join(__dirname, './fixtures/test3.html');
 
   function expectStream(done, options){
@@ -45,6 +46,16 @@ describe('gulp-swig compilation', function(){
       expected : '<div class="layout">hello</div>'
     };
     gulp.src(filename_with_layout)
+      .pipe(task(opts))
+      .pipe(expectStream(done, opts));
+  });
+
+  it('should continue without error if no json file was found when load_json is set to true', function(done){
+    var opts = {
+      load_json: true,
+      expected : 'world\n'
+    };
+    gulp.src(filename_without_json)
       .pipe(task(opts))
       .pipe(expectStream(done, opts));
   });
