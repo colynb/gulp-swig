@@ -3,7 +3,8 @@
   "version": "0.5.2",
   "description": "Swig Plugin for Gulp",
   "keywords": [
-    "gulpplugin", "swig"
+    "gulpplugin",
+    "swig"
   ],
   "repository": "https://github.com/colynb/gulp-swig",
   "author": "Colyn Brown <colyn.brown@gmail.com>",

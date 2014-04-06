@@ -10,7 +10,7 @@ var path = require('path');
 function extend(target) {
   'use strict';
   var sources = [].slice.call(arguments, 1);
-  sources.forEach(function (source) {
+  sources.forEach(function(source) {
     for (var prop in source) {
       if (source.hasOwnProperty(prop)) {
         target[prop] = source[prop];
@@ -20,7 +20,7 @@ function extend(target) {
   return target;
 }
 
-module.exports = function(options){
+module.exports = function(options) {
   'use strict';
 
   var opts = options ? clone(options) : {};
@@ -34,7 +34,7 @@ module.exports = function(options){
     opts.setup(swig);
   }
 
-  function gulpswig(file, callback){
+  function gulpswig(file, callback) {
 
     var data = opts.data || {}, jsonPath;
 
@@ -43,19 +43,16 @@ module.exports = function(options){
     }
 
     if (opts.load_json === true) {
-      try {
-        if (opts.json_path) {
-          jsonPath = path.join(opts.json_path,ext(path.basename(file.path), '.json'));
-        } else {
-          jsonPath = ext(file.path, '.json');
-        }
-
-        if (fs.existsSync(jsonPath)) {
-          data = extend(JSON.parse(fs.readFileSync(jsonPath)), data);
-        }
-      } catch (err) {
-        throw new PluginError('gulp-swig', err.toString());
+      if (opts.json_path) {
+        jsonPath = path.join(opts.json_path, ext(path.basename(file.path), '.json'));
+      } else {
+        jsonPath = ext(file.path, '.json');
       }
+
+      // skip error if json file doesn't exist
+      try {
+        data = extend(JSON.parse(fs.readFileSync(jsonPath)), data);
+      } catch (err) {}
     }
 
     var newFile = clone(file);
