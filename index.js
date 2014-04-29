@@ -38,6 +38,7 @@ module.exports = function(options) {
 
     var data = opts.data || {}, jsonPath;
 
+
     if (typeof data === 'function') {
       data = data(file);
     }
@@ -56,7 +57,7 @@ module.exports = function(options) {
     }
 
     var newFile = clone(file);
-    var tpl = swig.compileFile(file.path);
+    var tpl = swig.compile(String(file.contents), {filename: file.path});
     var compiled = tpl(data);
 
     newFile.path = ext(newFile.path, opts.ext);
