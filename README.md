@@ -42,6 +42,27 @@ gulp.task('templates', function() {
 });
 ```
 
+### ** NEW **
+
+Inject data into your templates via the new [gulp-data](https://npmjs.org/package/gulp-data) plugin. It creates a ```file.data``` property with the data you need. This new method makes it much easier and less restrictive for getting data, than the methods below it. I'd recommend using this new method.
+
+
+```javascript
+var getJsonData = function(file, cb) {
+  var jsonPath = './examples/' + path.basename(file.path) + '.json';
+  cb(require(jsonPath));
+};
+
+gulp.task('json-test', function() {
+  return gulp.src('./examples/test1.html')
+    .pipe(data(getJsonData))
+    .pipe(swig())
+    .pipe(gulp.dest('build'));
+});
+```
+
+### ** PRE version 0.7.0 (but still works) **
+
 Inject variables from data object into templates
 
 ```javascript
