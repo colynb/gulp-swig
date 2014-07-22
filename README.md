@@ -12,6 +12,10 @@
 <td>Node Version</td>
 <td>≥ 0.8</td>
 </tr>
+<tr>
+<td>Swig Version</td>
+<td>1.4.*</td>
+</tr>
 </table>
 
 [![Build Status](https://travis-ci.org/colynb/gulp-swig.png?branch=master)](https://travis-ci.org/colynb/gulp-swig)
