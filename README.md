@@ -52,9 +52,14 @@ Inject data into your templates via the new [gulp-data](https://npmjs.org/packag
 
 
 ```javascript
-var getJsonData = function(file, cb) {
-  var jsonPath = './examples/' + path.basename(file.path) + '.json';
-  cb(require(jsonPath));
+/*
+  Get data via JSON file, keyed on filename.
+*/
+var swig = require('gulp-swig');
+var data = require('gulp-data');
+
+var getJsonData = function(file) {
+  return require('./examples/' + path.basename(file.path) + '.json');
 };
 
 gulp.task('json-test', function() {
