@@ -59,14 +59,18 @@ module.exports = function(options) {
       } catch (err) {}
     }
 
-    var newFile = clone(file);
-    var tpl = swig.compile(String(file.contents), {filename: file.path});
-    var compiled = tpl(data);
+    try {
+      var tpl = swig.compile(String(file.contents), {filename: file.path});
+      var compiled = tpl(data);
 
-    newFile.path = ext(newFile.path, opts.ext);
-    newFile.contents = new Buffer(compiled);
+      file.path = ext(file.path, opts.ext);
+      file.contents = new Buffer(compiled);
 
-    callback(null, newFile);
+      callback(null, file);
+    } catch (err) {
+      callback(new PluginError('gulp-swig', err));
+      callback();
+    }
   }
 
   return es.map(gulpswig);
