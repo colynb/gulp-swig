@@ -38,12 +38,12 @@ module.exports = function(options) {
 
     var data = opts.data || {}, jsonPath;
 
-    if (file.data) {
-      data = extend(file.data, data);
-    }
-
     if (typeof data === 'function') {
       data = data(file);
+    }
+
+    if (file.data) {
+      data = extend(file.data, data);
     }
 
     if (opts.load_json === true) {
