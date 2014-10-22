@@ -19,6 +19,7 @@
 </table>
 
 [![Build Status](https://travis-ci.org/colynb/gulp-swig.png?branch=master)](https://travis-ci.org/colynb/gulp-swig)
+[![Dependencies](https://david-dm.org/colynb/gulp-swig.png)](https://david-dm.org/colynb/gulp-swig)
 
 [![NPM](https://nodei.co/npm/gulp-swig.png?stars&downloads)](https://npmjs.org/package/gulp-swig)
 
