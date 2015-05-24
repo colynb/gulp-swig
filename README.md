@@ -47,6 +47,14 @@ gulp.task('templates', function() {
 });
 ```
 
+Avoid caching when watching/compiling html templates with BrowserSync, etc.
+
+```javascript
+.pipe(swig({defaults: { cache: false }}))
+```
+
+
+
 ### ** NEW **
 
 Inject data into your templates via the new [gulp-data](https://npmjs.org/package/gulp-data) plugin. It creates a ```file.data``` property with the data you need. This new method makes it much easier and less restrictive for getting data, than the methods below it. I'd recommend using this new method.
