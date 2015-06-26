@@ -60,8 +60,33 @@ module.exports = function(options) {
     }
 
     try {
-      var tpl = swig.compile(String(file.contents), {filename: file.path});
-      var compiled = tpl(data);
+      var compiled;
+
+      if (opts.precompile) {
+        var preTpl = swig.precompile(String(file.contents), {filename: file.path});
+        var templateText = preTpl.tpl.toString();
+
+        if (typeof opts.precompile === "string") {
+          var gutilOpts = {
+            template: templateText,
+            file: {
+              path: file.path,
+              name: path.basename(file.path),
+              basename: path.basename(file.path, path.extname(file.path)),
+              ext: path.extname(file.path)
+            }
+          };
+
+          compiled = gutil.template(opts.precompile, gutilOpts);
+        }
+        else {
+          compiled = templateText;
+        }
+      }
+      else {
+        var tpl = swig.compile(String(file.contents), {filename: file.path});
+        compiled = tpl(data);
+      }
 
       file.path = ext(file.path, opts.ext);
       file.contents = new Buffer(compiled);
