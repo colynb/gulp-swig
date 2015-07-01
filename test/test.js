@@ -17,6 +17,7 @@ describe('gulp-swig compilation', function() {
     var filename_without_layout = path.join(__dirname, './fixtures/test2.html');
     var filename_without_json = path.join(__dirname, './fixtures/test4.html');
     var filename_with_markdown = path.join(__dirname, './fixtures/test3.html');
+    var filename_with_varControls = path.join(__dirname, './fixtures/test5.html');
 
     function expectStream(done, options) {
       options = options || {};
@@ -120,6 +121,19 @@ describe('gulp-swig compilation', function() {
         expected: '<p><strong>hello</strong><br>world</p>\n'
       };
       gulp.src(filename_with_markdown)
+        .pipe(task(opts))
+        .pipe(expectStream(done, opts));
+    });
+
+    it('should compile custom varControls', function(done) {
+      var opts = {
+        varControls: ['{{@test', '}}'],
+        data:{
+          message1:'Hello'
+        },
+        expected: 'Hello\n'
+      };
+      gulp.src(filename_with_varControls)
         .pipe(task(opts))
         .pipe(expectStream(done, opts));
     });
