@@ -60,7 +60,9 @@ module.exports = function(options) {
     }
 
     try {
-      var tpl = swig.compile(String(file.contents), {filename: file.path});
+
+      var _swig = opts.varControls ? new swig.Swig(opts) : swig;
+      var tpl = _swig.compile(String(file.contents), {filename: file.path});
       var compiled = tpl(data);
 
       file.path = ext(file.path, opts.ext);
