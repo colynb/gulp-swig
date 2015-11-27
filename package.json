@@ -12,8 +12,7 @@
     "event-stream": "~3.0.15",
     "clone": "~0.1.9",
     "gulp-util": "~2.2.14",
-    "swig": "1.4.*",
-    "gulp": "~3.5.1"
+    "swig": "1.4.*"
   },
   "main": "index.js",
   "engines": {
@@ -25,6 +24,7 @@
   "devDependencies": {
     "mocha": "~1.12.0",
     "chai": "~1.7.2",
-    "swig-marked": "~0.0.1"
+    "swig-marked": "~0.0.1",
+    "gulp": "~3.5.1"
   }
 }
