@@ -43,7 +43,11 @@ module.exports = function(options) {
     }
 
     if (file.data) {
-      data = extend(file.data, data);
+      if(opts.extend_filedata !== false) {
+        data = extend(file.data, data);
+      } else {
+        data.filedata = file.data
+      }
     }
 
     if (opts.load_json === true) {
