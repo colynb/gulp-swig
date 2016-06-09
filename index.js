@@ -24,7 +24,6 @@ module.exports = function(options) {
   'use strict';
 
   var opts = options ? clone(options) : {};
-  opts.ext = opts.ext || ".html";
 
   if (opts.defaults) {
     swig.setDefaults(opts.defaults);
@@ -65,7 +64,7 @@ module.exports = function(options) {
       var tpl = _swig.compile(String(file.contents), {filename: file.path});
       var compiled = tpl(data);
 
-      file.path = ext(file.path, opts.ext);
+      file.path = opts.ext ? ext(file.path, opts.ext) : file.path;
       file.contents = new Buffer(compiled);
 
       callback(null, file);
