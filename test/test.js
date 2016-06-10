@@ -18,6 +18,7 @@ describe('gulp-swig compilation', function() {
     var filename_without_json = path.join(__dirname, './fixtures/test4.html');
     var filename_with_markdown = path.join(__dirname, './fixtures/test3.html');
     var filename_with_varControls = path.join(__dirname, './fixtures/test5.html');
+    var filename_different_ext = path.join(__dirname, './fixtures/test.css');
 
     function expectStream(done, options) {
       options = options || {};
@@ -25,6 +26,10 @@ describe('gulp-swig compilation', function() {
         var result = String(file.contents);
         var expected = options.expected;
         expect(result).to.equal(expected);
+        if (options.expectedExt) {
+          var expectedExt = options.expectedExt;
+          expect(path.extname(file.path)).to.equal(expectedExt);
+        }
         done();
       });
     }
@@ -138,6 +143,28 @@ describe('gulp-swig compilation', function() {
         .pipe(expectStream(done, opts));
     });
 
+    it('should use the file extension from the stream by default', function(done) {
+      var opts = {
+        load_json: true,
+        expected: 'body { color: white; }\n',
+        expectedExt: '.css'
+      };
+      gulp.src(filename_different_ext)
+          .pipe(task(opts))
+          .pipe(expectStream(done, opts));
+    });
+
+    it('should use the file extension from opts.ext instead of the stream', function(done) {
+      var opts = {
+        ext: '.less',
+        load_json: true,
+        expected: 'body { color: white; }\n',
+        expectedExt: '.less'
+      };
+      gulp.src(filename_different_ext)
+          .pipe(task(opts))
+          .pipe(expectStream(done, opts));
+    });
   });
 
 });
