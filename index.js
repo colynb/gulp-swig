@@ -26,13 +26,13 @@ module.exports = function(options) {
   var opts = options ? clone(options) : {};
   opts.ext = opts.ext || ".html";
 
-  if (opts.defaults) {
-    swig.setDefaults(opts.defaults);
-  }
+  //if (opts.defaults) {
+  //  swig.setDefaults(opts.defaults);
+  //}
 
-  if (opts.setup && typeof opts.setup === 'function') {
-    opts.setup(swig);
-  }
+  //if (opts.setup && typeof opts.setup === 'function') {
+  //  opts.setup(swig);
+  //}
 
   function gulpswig(file, callback) {
 
@@ -62,6 +62,13 @@ module.exports = function(options) {
     try {
 
       var _swig = opts.varControls ? new swig.Swig(opts) : swig;
+      if (opts.defaults) {
+        _swig.setDefaults(opts.defaults);
+      }
+
+      if (opts.setup && typeof opts.setup === 'function') {
+        opts.setup(_swig);
+      }
       var tpl = _swig.compile(String(file.contents), {filename: file.path});
       var compiled = tpl(data);
 
