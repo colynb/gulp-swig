@@ -1,5 +1,5 @@
 var es = require('event-stream');
-var swig = require('swig');
+var swig = require('swig-templates');
 var clone = require('clone');
 var gutil = require('gulp-util');
 var ext = gutil.replaceExtension;
