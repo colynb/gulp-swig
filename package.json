@@ -12,7 +12,7 @@
     "event-stream": "~3.0.15",
     "clone": "~0.1.9",
     "gulp-util": "~2.2.14",
-    "swig": "1.4.*",
+    "swig-templates": "^2.0.1",
     "gulp": "~3.5.1"
   },
   "main": "index.js",
