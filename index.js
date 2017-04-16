@@ -50,7 +50,7 @@ module.exports = function(options) {
       if (opts.json_path) {
         jsonPath = path.join(opts.json_path, ext(path.basename(file.path), '.json'));
       } else {
-        jsonPath = ext(file.path, '.json');
+        jsonPath = opts.jsonPath || ext(file.path, '.json');
       }
 
       // skip error if json file doesn't exist
