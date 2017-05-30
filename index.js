@@ -46,6 +46,10 @@ module.exports = function(options) {
       data = extend(file.data, data);
     }
 
+    if (typeof data === 'function') {
+      data = data(file);
+    }
+
     if (opts.load_json === true) {
       if (opts.json_path) {
         jsonPath = path.join(opts.json_path, ext(path.basename(file.path), '.json'));
