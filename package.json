@@ -1,6 +1,6 @@
 {
   "name": "gulp-swig",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Swig Plugin for Gulp",
   "keywords": [
     "gulpplugin",
@@ -9,22 +9,24 @@
   "repository": "https://github.com/colynb/gulp-swig",
   "author": "Colyn Brown <colyn.brown@gmail.com>",
   "dependencies": {
-    "event-stream": "~3.0.15",
-    "clone": "~0.1.9",
-    "gulp-util": "~2.2.14",
-    "swig": "1.4.*",
-    "gulp": "~3.5.1"
+    "clone": "~2.1.2",
+    "event-stream": "~4.0.1",
+    "gulp": "^4.0.0",
+    "gulp-util": "~3.0.8",
+    "plugin-error": "^1.0.1",
+    "replace-ext": "^1.0.0",
+    "swig": "1.4.*"
   },
   "main": "index.js",
   "engines": {
-    "node": ">= 0.4.0"
+    "node": ">=8"
   },
   "scripts": {
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "~1.12.0",
-    "chai": "~1.7.2",
+    "chai": "~4.2.0",
+    "mocha": "^6.0.2",
     "swig-marked": "~0.0.1"
   }
 }
