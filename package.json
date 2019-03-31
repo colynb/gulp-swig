@@ -15,7 +15,7 @@
     "gulp-util": "~3.0.8",
     "plugin-error": "^1.0.1",
     "replace-ext": "^1.0.0",
-    "swig": "1.4.*"
+    "swig-templates": "^2.0.3"
   },
   "main": "index.js",
   "engines": {
