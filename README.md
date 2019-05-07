@@ -27,6 +27,8 @@
 
 [Learn more about templating with Swig](http://paularmstrong.github.io/swig/)
 
+[Donate](https://www.paypal.me/ColynBrown?locale.x=en_US)
+
 ## Install with NPM
 
 ```
