@@ -27,7 +27,7 @@
 
 [Learn more about templating with Swig](http://paularmstrong.github.io/swig/)
 
-[Donate](https://www.paypal.me/ColynBrown?locale.x=en_US)
+[![Donate](https://infrontlabs.com/Donate.612b038d.png)](https://www.paypal.me/ColynBrown?locale.x=en_US)
 
 ## Install with NPM
 
